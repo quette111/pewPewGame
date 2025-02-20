@@ -1,0 +1,254 @@
+@import url("https://fonts.googleapis.com/css2?family=Alumni+Sans+Pinstripe:ital@0;1&family=Badeen+Display&family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&family=Fjalla+One&family=Fleur+De+Leah&family=Ga+Maamli&family=Itim&family=Playwrite+AR:wght@100..400&family=Playwrite+BE+VLG:wght@100..400&family=Press+Start+2P&family=Sedgwick+Ave&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Special+Elite&display=swap");
+
+body {
+  font-family: "Press Start 2P", serif;
+  font-weight: 400;
+  font-style: normal;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#head {
+  display: flex;
+  color: #007fff;
+  font-size: 10rem;
+  filter: hue-rotate(360deg);
+}
+
+
+#head2 {
+  position: absolute;
+  bottom: 50%;
+  display: flex;
+  color: #007fff;
+  font-size: 9rem;
+  filter: hue-rotate(360deg);
+}
+@keyframes blink {
+  0% {
+    color: red;
+  }
+
+  50% {
+    color: white;
+  }
+
+  100% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes blinkBorder {
+  0% {
+    border-color: red;
+  }
+
+  50% {
+    border-color: white;
+  }
+
+  100% {
+    border-opacity: 0.5;
+  }
+}
+
+#gameScreen {
+  display: flex;
+  position: absolute;
+  align-self: center;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  height: 60%;
+  color: white;
+  filter: hue-rotate(0deg);
+  backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.082);
+  width: 70%;
+  border: 1px solid white;
+  top: 20%;
+}
+
+#startGame {
+  position: absolute;
+  top: 90%;
+  height: 5%;
+  width: 10%;
+  box-shadow: white;
+  border: solid white 1.5px;
+  color: white;
+  cursor: pointer;
+  background-color: rgb(53, 128, 9);
+  font-family: "Press Start 2P", serif;
+  padding: 12px 40px;
+  border-radius: 5px;
+  box-shadow: 7px 6px 28px 1px rgba(255, 252, 252, 0.788);
+
+  outline: none;
+  transition: 0.3s all;
+}
+
+#startGame:active {
+  transform: scale(0.98);
+  /* Scaling button to 0.98 to its original size */
+  box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
+}
+
+#introScreen {
+  color: black;
+}
+
+#typeShit {
+  color: #007fff;
+}
+
+#load {
+  height: 25px;
+  width: 50px;
+  background-color: #007fff;
+}
+
+#loading {
+  color: rgb(255, 255, 255);
+  display: flex;
+  position: absolute;
+  top: 50%;
+  left: 5%;
+  font-size: 20px;
+}
+
+#loadContainer {
+  position: absolute;
+  top: 48.5%;
+  left: 44.71%;
+  height: 24.5px;
+  width: 148.4px;
+  color: rgba(127, 255, 212, 0);
+  border: 1px solid rgb(255, 255, 255);
+}
+
+#triangleGuy {
+  display: flex;
+  align-self: center;
+  top: 40%;
+  right: 41%;
+  height: 75px;
+  width: 75px;
+  align-self: center;
+  align-items: center;
+  position: fixed;
+  transform: rotate(-0.25turn);
+  cursor: pointer;
+}
+
+#squareGuy {
+  height: 75px;
+  width: 75px;
+  display: flex;
+  align-self: center;
+  top: 40%;
+  right: 55%;
+  transform: rotate(-0.25turn);
+  align-self: center;
+  align-items: center;
+  position: fixed;
+
+  cursor: pointer;
+}
+#squareGuy:hover {
+}
+
+#squareGuy.active {
+  display: block;
+}
+
+#triangleGuy:hover {
+}
+#triangleGuy.active {
+  display: block;
+}
+#chooseCharacter {
+  position: absolute;
+  top: 40%;
+  display: flex;
+  padding: 10%;
+  padding-bottom: 0%;
+}
+
+#hide {
+  display: none;
+  position: absolute;
+  left: 33%;
+  width: 100%;
+  top: 33%;
+}
+
+#choose {
+  position: relative;
+  right: 34%;
+  color: white;
+  font-size: 20px;
+  margin-right: 15%;
+  top: 60px;
+  text-align: center;
+  animation: blink 2s infinite;
+}
+
+#gameAntag {
+  height: 75px;
+  width: 75px;
+  transform: rotate(90deg);
+  position: absolute;
+  right: 130%;
+}
+
+@keyframes move-twink-back {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -10000px 5000px;
+  }
+}
+
+@keyframes move-clouds-back {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 10000px 0;
+  }
+}
+
+.stars,
+.twinkling,
+.clouds {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.stars {
+  background: #000 url(stars.png) repeat top center;
+  z-index: 0;
+}
+
+.twinkling {
+  background: transparent url(twinkling.png) repeat top center;
+  z-index: 0;
+  animation: move-twink-back 200s linear infinite;
+}
+
+.clouds {
+  background: transparent url(clouds.png) repeat top center;
+  z-index: 0;
+  opacity: 0.4;
+  animation: move-clouds-back 200s linear infinite;
+}
