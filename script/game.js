@@ -9,14 +9,36 @@ const hide = document.getElementById("hide");
 const loading = document.getElementById("loading");
 const loadContainer = document.getElementById("loadContainer");
 const head2 = document.getElementById("head2");
+const healthContain = document.getElementById('healthContainer');
+let img = document.createElement('img');
+let img2 = document.createElement('img');
+let img3 = document.createElement('img');
+img.src = 'heart.png'
+img2.src = 'heart.png'
+img3.src = 'heart.png'
+let src = healthContain
 
 triangleGuy.hidden = true; //setting certain elements to not appear
 squareGuy.hidden = true;
 choose.hidden = true;
 chooseCharacter.hidden = true;
 hiddenDiv.hidden = true;
+let endContainer = document.getElementById('endScreenContainer')
+let myProgress = document.getElementById('myProgress');
 
+
+state = {
+  disabled: false
+}
+ //Or whatever you want to do with it.
 function startGame() {
+  src.appendChild(img);
+
+  src.appendChild(img2);
+
+src.appendChild(img3);
+  chooseCharacter.append(triangleGuy)
+chooseCharacter.append(squareGuy)
   document.body.style.cssText = `cursor: wait`; //initializing a loading screen for user experience
 
   gameScreen.style.background = "transparent";
@@ -28,23 +50,26 @@ backdrop-filter: blur(20px);
 -webkit-backdrop-filter: blur(20px);
 `;
 
-  let intro = "W e l c o m e - t o - t y p eS h i t - theGame:-)"; //setting intro variable to a string
-
+  let intro = "ø¤º°`°º¤ø,¸¸,ø¤º°ᖇ Y ᗩ ᑎ 'ᔕ ᖇ O ᑕ K E T ᖇEᔕᑕᑌE°º¤ø,¸¸,ø¤º°`°º¤ø"; //setting intro variable to a string
+  
   for (let i = 0; i < intro.length; i++) {
     //passing string value to a for loop to iterate through and display one letter at a time
     setTimeout(function() {
       gameScreen.innerHTML += intro[i];
     }, 50 * (i + 1));
   }
+startButton.innerHTML = 'HEALTH:'; 
 
-  startButton.hidden = true; //after intro screen appears and goes thru loading process, clear displayed elements
+
+  startButton.disabled = true
+  //after intro screen appears and goes thru loading process, clear displayed elements
   setTimeout(() => {
     gameScreen.innerHTML = "";
   }, 4000);
 }
 
 let screen =
-  "Prepare for battle! Select your fighter and evade incoming enemy missiles. If you're hit three times, the enemy's attack will succeed.";
+  "Select your fighter and evade incoming enemy missiles";
 
 function loadGame() {
   let array = []; //using separate div items to continue loading screen, storing them in an array to iterate through, giving the appearance of a screen loading
@@ -86,15 +111,22 @@ function loadGame() {
 
 
 
-
 function getRandomInteger(max) {
   //creating function to create random number using the Math object
   return Math.floor(Math.random() * max);
 }
 
+let stars = document.getElementsByClassName('stars')
 
+function changeBackground(){
+  
+  head2.remove()
+  
+  gameScreen.style.cssText = "border: none; background: rgba(0,0,0,0.0); box-shadow:none; z-index: 0";
+element.style.cssText = "z-index: 10000";
+stars.style.cssText = "animation: move-clouds-back 400s linear infinite;";
 
-
+}
 
 
 
@@ -152,19 +184,95 @@ function chooseAnimalFighter() {
 
 
 
+function displayResetScreen(){
+
+  
+  endContainer.innerHTML = `
+  
+  <h1 id='resetText'>GAME OVER</h1>
+  <h2 id='scoreText'>Score:${seconds}</h2>
+
+    <button onclick='homeScreen()' id='homeButton'>HOME</button>
+
+    <button onclick='resetGame()' id='resetButton'>PLAY AGAIN</button>
+    `
+endContainer.cssText = `height: 500px; width: 500px`;
+
+triangleGuy.remove()
+  squareGuy.remove()
+
+
+  }
 
 
 
-
-
-
+const d = new Date();
+  let seconds = d.getMilliseconds();
 
 function chooseGrinchFighter() {
+
+ 
 //let newImg = document.createElement('img');
 //img.src =
+squareGuy.remove()
 
-  squareGuy.remove();
   choose.remove();
+ 
+  document.addEventListener("keydown", keyDownHandler, false);
+  document.addEventListener("keyup", keyUpHandler, false);
+
+  let rightPressed = false;
+  let leftPressed = false;
+  let upPressed = false;
+  let downPressed = false;
+
+  function keyDownHandler(event){
+    if (event.code === "ArrowRight") {
+      rightPressed = true;
+    } else if (event.code === "ArrowLeft") {
+      leftPressed = true;
+    }
+    if (event.code === "ArrowDown") {
+      downPressed = true;
+    } else if (event.code === "ArrowUp") {
+      upPressed = true;
+    }
+  }
+
+  function keyUpHandler(event){
+    if (event.code === "ArrowRight") {
+      rightPressed = true;
+    } else if (event.code === "ArrowLeft") {
+      leftPressed = true;
+    }
+    if (event.code === "ArrowDown") {
+      downPressed = true;
+    } else if (event.code === "ArrowUp") {
+      upPressed = true;
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    if (rightPressed){
+      playerX += 5;
+    } else if (leftPressed) {
+      playerX -= 5
+    }
+
+    if (downPressed) {
+      playerY += 5;
+    } else if (upPressed){
+      playerY -= 5
+    }
+    ctx.drawImage(triangleGuy, playerX, playerY);
+    requestAnimationFrame(draw)
+
+  }
+
+
+
+
   document.body.style.cssText = `cursor: default`;
 
   document.addEventListener("mousemove", a => {
@@ -186,12 +294,14 @@ function chooseGrinchFighter() {
 
   let start;
 
-  let counting = 50;
+  let counting = 100;
 
     function moveGameObjects(timestamp) {
-        
+       
+
         const elementTrack = element.getBoundingClientRect();
         let triTrack = triangleGuy.getBoundingClientRect();
+       
 
         let overlap = !(
         elementTrack.right < triTrack.left ||
@@ -200,20 +310,28 @@ function chooseGrinchFighter() {
         elementTrack.top > triTrack.bottom
         );
         
-       
         if (overlap === true) {
-        
+          
+          startButton.innerHTML = `HEALTH:${counting}`
+          
+                    counting--;
             let scoreKeeper = document.createElement('div');
-            scoreKeeper.innerHTML += `Score: ${counting}`
-            counting--;
         }
 
+        if(counting < 70){
+          img.remove()
+        }
+        if(counting < 35){
+          img2.remove()
+        }
 
-        if(counting < 1){
-            let loserScreen = document.createElement('div');
-            /*loserScreen.innerHTML += */ alert(`Womp womp, you suck bro! Your score ${counting} thats lowkey`)
-            //incrementing to cot times ship is hit
-        return;
+        if(counting < 0){
+          img3.remove()
+          displayResetScreen()  
+            return;
+            
+          
+        
         }
         console.log(counting);
 
@@ -236,7 +354,7 @@ function chooseGrinchFighter() {
         // Replace screenWidth with the actual width of your game screen
         rocketParam = getRandomInteger(425); // Randomize the vertical position
         start = undefined; // Reset the animation start time
-        addNewRocket()
+       
 
         requestAnimationFrame(moveGameObjects);
         }
@@ -249,8 +367,36 @@ function chooseGrinchFighter() {
 
 
 
+function resetGame(){
+  document.body.style.cssText = `cursor: wait`; //initializing a loading screen for user experience
+endContainer.remove()
 
-function addNewRocket() {
+  loadGame()
+
+setTimeout(() => {
+chooseCharacter.append(triangleGuy)
+chooseCharacter.append(element)
+chooseCharacter.append(squareGuy)
+startButton.innerHTML = 'START'; 
+startButton.disabled = true
+startGame()
+}, 7000 );
+}
+
+function homeScreen(){
+
+  endContainer.remove()
+  startButton.innerHTML = 'START'; 
+  startButton.disabled = false
+
+}
+
+
+
+
+
+
+/*function addNewRocket() {
 
 
 const newRocket = new Image(0,500);
@@ -263,7 +409,7 @@ gameScreen.appendChild(newRocket);
        
  gameScreen.innerHTML += newRocket
 
-
+  
 /*
   let rocketParam2 = getRandomInteger(425);
 
@@ -335,11 +481,11 @@ addNewRocket()
 
   requestAnimationFrame(moveGameObjects2);
   
-*/
+
 }
 
 
 
-
+*/
 
 

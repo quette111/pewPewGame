@@ -11,26 +11,29 @@
         <div class="stars"></div>
         <div class="twinkling"></div> 
        <div class="clouds"></div>
-    <header id="head">TypeShit</header> <header id="head2">theGame</header>
+    <header id="head">Ryan's Rocket</header> <header id="head2">Resucue</header>
     
         <div id="gameScreen">
-                    
         </div>
     
         <div id="hide">
         <div id='chooseCharacter'>
                         <h2 id="choose"></h2>
-                        <img src='grinch.png' onclick="chooseGrinchFighter()"  id="triangleGuy"></img>
+                        <img src='grinch.png' onclick="chooseGrinchFighter(); changeBackground();"  id="triangleGuy"></img>
                         <img src="bandi.png" onclick='chooseAnimalFighter()' id="squareGuy"></img>
+                   
 
-                    </div></div>
+                    </div>
+                </div>
                         <div id="hiddenDiv"></div>
                         <div hidden id="loadContainer">
                         <h1 hidden id="loading">Loading . . .</h1>
 </div></div>
+            <div id='endScreenContainer'></div>
+                             <div id="healthContainer"></div>
 
             <button onclick="startGame(); loadGame();" id="startGame">START</button>
- 
+            
     <script src="script/game.js"></script>
 </body>
 </html>
