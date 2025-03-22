@@ -26,19 +26,21 @@ hiddenDiv.hidden = true;
 let endContainer = document.getElementById('endScreenContainer')
 let myProgress = document.getElementById('myProgress');
 
+var audio = new Audio('spaceSound.mp3');
+audio.loop = true;
+audio.play();
 
 state = {
   disabled: false
 }
- //Or whatever you want to do with it.
 function startGame() {
   src.appendChild(img);
 
   src.appendChild(img2);
 
-src.appendChild(img3);
+  src.appendChild(img3);
   chooseCharacter.append(triangleGuy)
-chooseCharacter.append(squareGuy)
+  chooseCharacter.append(squareGuy)
   document.body.style.cssText = `cursor: wait`; //initializing a loading screen for user experience
 
   gameScreen.style.background = "transparent";
@@ -51,14 +53,14 @@ backdrop-filter: blur(20px);
 `;
 
   let intro = "ø¤º°`°º¤ø,¸¸,ø¤º°ᖇ Y ᗩ ᑎ 'ᔕ ᖇ O ᑕ K E T ᖇEᔕᑕᑌE°º¤ø,¸¸,ø¤º°`°º¤ø"; //setting intro variable to a string
-  
+
   for (let i = 0; i < intro.length; i++) {
     //passing string value to a for loop to iterate through and display one letter at a time
-    setTimeout(function() {
+    setTimeout(function () {
       gameScreen.innerHTML += intro[i];
     }, 50 * (i + 1));
   }
-startButton.innerHTML = 'HEALTH:'; 
+  startButton.innerHTML = 'HEALTH:';
 
 
   startButton.disabled = true
@@ -72,6 +74,8 @@ let screen =
   "Select your fighter and evade incoming enemy missiles";
 
 function loadGame() {
+  var audio3 = new Audio('typing.mp3');
+audio3.play();
   let array = []; //using separate div items to continue loading screen, storing them in an array to iterate through, giving the appearance of a screen loading
   array.push("<div id='load'>");
   array.push("<div id='load'>");
@@ -80,7 +84,7 @@ function loadGame() {
     //time for loop
 
     for (let i = 0; i < array.length; i++) {
-      setTimeout(function() {
+      setTimeout(function () {
         loadContainer.hidden = false; //iterating through the loading array
         loading.hidden = false;
         gameScreen.innerHTML += array[i];
@@ -95,7 +99,7 @@ function loadGame() {
 
       for (let i = 0; i < screen.length; i++) {
         //passing string value to a for loop to iterate through and display welcome screen words one letter at a time
-        setTimeout(function() {
+        setTimeout(function () {
           choose.innerHTML += screen[i];
         }, 50 * (i + 1)); //display pattern of variable screen
       }
@@ -103,6 +107,9 @@ function loadGame() {
       choose.hidden = false;
       hide.style.display = "inline";
       loadContainer.hidden = true;
+      var audio2 = new Audio('alarm.mp3');
+
+audio2.play();
     }, 4000);
   }, 6000);
 }
@@ -118,13 +125,13 @@ function getRandomInteger(max) {
 
 let stars = document.getElementsByClassName('stars')
 
-function changeBackground(){
-  
+function changeBackground() {
+
   head2.remove()
-  
+
   gameScreen.style.cssText = "border: none; background: rgba(0,0,0,0.0); box-shadow:none; z-index: 0";
-element.style.cssText = "z-index: 10000";
-stars.style.cssText = "animation: move-clouds-back 400s linear infinite;";
+  element.style.cssText = "z-index: 10000";
+  stars.style.cssText = "animation: move-clouds-back 400s linear infinite;";
 
 }
 
@@ -163,10 +170,12 @@ function chooseAnimalFighter() {
 
     const shift = Math.max(0.1 * elapsed, 70);
     //if else loop???? to loop the rockets back on screen
+    var audio4 = new Audio('boom.mp3');
 
+audio4.play();
     element.style.cssText = `top: ${rocketParam}px`;
     element.style.transform = `translateX(${shift}px)`;
-  
+
 
     if (shift < 1650) {
       requestAnimationFrame(moveGameObjects);
@@ -184,9 +193,9 @@ function chooseAnimalFighter() {
 
 
 
-function displayResetScreen(){
-
+function displayResetScreen() {
   
+
   endContainer.innerHTML = `
   
   <h1 id='resetText'>GAME OVER</h1>
@@ -196,28 +205,31 @@ function displayResetScreen(){
 
     <button onclick='resetGame()' id='resetButton'>PLAY AGAIN</button>
     `
-endContainer.cssText = `height: 500px; width: 500px`;
+  endContainer.cssText = `height: 500px; width: 500px`;
 
-triangleGuy.remove()
+  triangleGuy.remove()
   squareGuy.remove()
+  audio.remove()
+var audio5 = new Audio('gameOver.mp3');
 
+  audio5.play();
 
-  }
+}
 
 
 
 const d = new Date();
-  let seconds = d.getMilliseconds();
+let seconds = d.getMilliseconds();
 
 function chooseGrinchFighter() {
 
- 
-//let newImg = document.createElement('img');
-//img.src =
-squareGuy.remove()
+
+  //let newImg = document.createElement('img');
+  //img.src =
+  squareGuy.remove()
 
   choose.remove();
- 
+
   document.addEventListener("keydown", keyDownHandler, false);
   document.addEventListener("keyup", keyUpHandler, false);
 
@@ -226,7 +238,7 @@ squareGuy.remove()
   let upPressed = false;
   let downPressed = false;
 
-  function keyDownHandler(event){
+  function keyDownHandler(event) {
     if (event.code === "ArrowRight") {
       rightPressed = true;
     } else if (event.code === "ArrowLeft") {
@@ -239,7 +251,7 @@ squareGuy.remove()
     }
   }
 
-  function keyUpHandler(event){
+  function keyUpHandler(event) {
     if (event.code === "ArrowRight") {
       rightPressed = true;
     } else if (event.code === "ArrowLeft") {
@@ -254,7 +266,7 @@ squareGuy.remove()
 
   function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    if (rightPressed){
+    if (rightPressed) {
       playerX += 5;
     } else if (leftPressed) {
       playerX -= 5
@@ -262,7 +274,7 @@ squareGuy.remove()
 
     if (downPressed) {
       playerY += 5;
-    } else if (upPressed){
+    } else if (upPressed) {
       playerY -= 5
     }
     ctx.drawImage(triangleGuy, playerX, playerY);
@@ -283,9 +295,9 @@ squareGuy.remove()
     triangleGuy.style.cssText = `left: ${x}px; top: ${y}px`;
   });
 
-  gameScreen.innerHTML = `<img src="rocket.gif" id="gameAntag"></img>` 
+  gameScreen.innerHTML = `<img src="rocket.gif" id="gameAntag"></img>`
 
-; 
+    ;
 
   let rocketParam = getRandomInteger(425);
 
@@ -296,97 +308,99 @@ squareGuy.remove()
 
   let counting = 100;
 
-    function moveGameObjects(timestamp) {
-       
+  function moveGameObjects(timestamp) {
 
-        const elementTrack = element.getBoundingClientRect();
-        let triTrack = triangleGuy.getBoundingClientRect();
-       
 
-        let overlap = !(
-        elementTrack.right < triTrack.left ||
-        elementTrack.left > triTrack.right ||
-        elementTrack.bottom < triTrack.top ||
-        elementTrack.top > triTrack.bottom
-        );
-        
-        if (overlap === true) {
-          
-          startButton.innerHTML = `HEALTH:${counting}`
-          
-                    counting--;
-            let scoreKeeper = document.createElement('div');
-        }
+    const elementTrack = element.getBoundingClientRect();
+    let triTrack = triangleGuy.getBoundingClientRect();
 
-        if(counting < 70){
-          img.remove()
-        }
-        if(counting < 35){
-          img2.remove()
-        }
 
-        if(counting < 0){
-          img3.remove()
-          displayResetScreen()  
-            return;
-            
-          
-        
-        }
-        console.log(counting);
+    let overlap = !(
+      elementTrack.right < triTrack.left ||
+      elementTrack.left > triTrack.right ||
+      elementTrack.bottom < triTrack.top ||
+      elementTrack.top > triTrack.bottom
+    );
 
-        if (start === undefined) {
-        start = timestamp;
-        }
-        const elapsed = timestamp - start;
+    if (overlap === true) {
+      var audio = new Audio('boom.mp3');
 
-        const shift = Math.max(0.3 * elapsed, 0);
-        element.style.cssText = `top: ${rocketParam}px`;
-        element.style.transform += `translateX(${shift}px)`;
-        
-        if (shift < 1650) {
-        requestAnimationFrame(moveGameObjects);
-        
-        }   
+      audio.play();
+      startButton.innerHTML = `HEALTH:${counting}`
 
-        if (shift > 1650) {
-          
-        // Replace screenWidth with the actual width of your game screen
-        rocketParam = getRandomInteger(425); // Randomize the vertical position
-        start = undefined; // Reset the animation start time
-       
+      counting--;
+      let scoreKeeper = document.createElement('div');
+    }
 
-        requestAnimationFrame(moveGameObjects);
-        }
-                
+    if (counting < 70) {
+      img.remove()
+    }
+    if (counting < 35) {
+      img2.remove()
+    }
+
+    if (counting < 0) {
+      img3.remove()
+      displayResetScreen()
+      return;
+
+
 
     }
+    console.log(counting);
+
+    if (start === undefined) {
+      start = timestamp;
+    }
+    const elapsed = timestamp - start;
+
+    const shift = Math.max(0.3 * elapsed, 0);
+    element.style.cssText = `top: ${rocketParam}px`;
+    element.style.transform += `translateX(${shift}px)`;
+
+    if (shift < 1650) {
+      requestAnimationFrame(moveGameObjects);
+
+    }
+
+    if (shift > 1650) {
+
+      // Replace screenWidth with the actual width of your game screen
+      rocketParam = getRandomInteger(425); // Randomize the vertical position
+      start = undefined; // Reset the animation start time
+
+
+      requestAnimationFrame(moveGameObjects);
+    }
+
+
+  }
 
   requestAnimationFrame(moveGameObjects);
 }
 
 
 
-function resetGame(){
+function resetGame() {
   document.body.style.cssText = `cursor: wait`; //initializing a loading screen for user experience
-endContainer.remove()
+  endContainer.remove()
 
   loadGame()
 
-setTimeout(() => {
-chooseCharacter.append(triangleGuy)
-chooseCharacter.append(element)
-chooseCharacter.append(squareGuy)
-startButton.innerHTML = 'START'; 
-startButton.disabled = true
-startGame()
-}, 7000 );
+  setTimeout(() => {
+    chooseCharacter.append(triangleGuy)
+    chooseCharacter.append(element)
+    chooseCharacter.append(squareGuy)
+    startButton.innerHTML = 'START';
+    startButton.disabled = true
+    startGame()
+  }, 7000);
 }
 
-function homeScreen(){
+function homeScreen() {
 
   endContainer.remove()
-  startButton.innerHTML = 'START'; 
+  startButton.innerHTML = 'START';
   startButton.disabled = false
 
 }
