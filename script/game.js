@@ -34,9 +34,9 @@ state = {
   disabled: false
 }
 
-userSet()
 
-  document.getElementById('startGame').addEventListener('click', function(){
+
+document.getElementById('startGame').addEventListener('click', function(){
 
   //console.log(username)  
     console.log('started')
@@ -44,6 +44,8 @@ userSet()
   if(document.getElementById('user').value == '' || document.getElementById('date').value == ''){
     alert('Please enter both username AND age to begin the game!')
   }else{
+window.username = document.getElementById('user').value
+//document.getElementById('inner').appendChild(document.createTextNode(document.getElementById('user').value))
     document.getElementById('userType').hidden = true
     document.getElementById('user').hidden = true; 
     document.getElementById('date').hidden = true//userType date
@@ -53,7 +55,6 @@ userSet()
   }
 }, 50)
 })
-let username = document.getElementById('user').value
 
 
 
@@ -215,8 +216,12 @@ audio4.play();
   requestAnimationFrame(moveGameObjects);
 }
 
+const date = new Date()
+let day = date.getDate()
+let month = date.getMonth()
+let year = date.getFullYear()
 
-
+let scoreBoardCon = document.getElementById('scoreBoardCon');
 function displayResetScreen() {
   
 
@@ -228,7 +233,9 @@ function displayResetScreen() {
     <button onclick='homeScreen()' id='homeButton'>HOME</button>
 
     <button onclick='resetGame()' id='resetButton'>PLAY AGAIN</button>
-    <div id='scoreBoard'>
+   
+    `
+    scoreBoardCon.innerHTML = ` <div id='scoreBoard'>
     <h2>High Scores</h2>
 
     <table>
@@ -237,7 +244,7 @@ function displayResetScreen() {
     </tr>
 
     <tr id='firstP'>
-    <th>${username}</th><th>25</th><th>2/20/2000</th>
+    <th id='inner'>${username}</th><th>${seconds}</th><th>${month}-${day}-${year}</th>
     </tr>
     <tr id='secondP'>
     <th>gomomiles</th><th>25</th><th>2/20/2000</th>
@@ -257,8 +264,7 @@ function displayResetScreen() {
     
     
     
-    </div>
-    `
+    </div>`
   endContainer.cssText = `height: 500px; width: 500px`;
 
   triangleGuy.remove()
