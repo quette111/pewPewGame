@@ -327,3 +327,33 @@ body {
   font-size: 100px;
   z-index: 100000;
 }
+
+#userName{
+  position: inherit;
+  top: 60%;
+  display: flex;
+  flex-direction: column;
+}
+
+#user{
+background-color: #ffffff6f;
+border: solid white 2px;
+margin-bottom: 3%;
+}
+
+
+table {
+  
+  border-collapse: collapse;
+  
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
