@@ -262,7 +262,7 @@ body {
   animation: blink 2s infinite;
 }
 
-#gameAntag {
+.gameAntag {
   height: 75px;
   width: 75px;
   transform: rotate(90deg);

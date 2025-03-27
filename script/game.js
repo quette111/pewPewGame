@@ -155,8 +155,8 @@ function changeBackground() {
   head2.remove()
 
   gameScreen.style.cssText = "border: none; background: rgba(0,0,0,0.0); box-shadow:none; z-index: 0";
-  element.style.cssText = "z-index: 10000";
-  stars.style.cssText = "animation: move-clouds-back 400s linear infinite;";
+  //element.style.cssText = "z-index: 10000";
+  //stars.style.cssText = "animation: move-clouds-back 400s linear infinite;";
 
 }
 
@@ -206,6 +206,7 @@ audio4.play();
       requestAnimationFrame(moveGameObjects);
     }
     if (shift > 1650) {
+    
       // Replace screenWidth with the actual width of your game screen
       rocketParam = getRandomInteger(425); // Randomize the vertical position
       start = undefined; // Reset the animation start time
@@ -281,7 +282,7 @@ var audio5 = new Audio('gameOver.mp3');
 const d = new Date();
 let seconds = d.getMilliseconds();
 
-function chooseGrinchFighter() {
+function chooseGrinchFighter(timestamp) {
 
 
   //let newImg = document.createElement('img');
@@ -355,23 +356,44 @@ function chooseGrinchFighter() {
     triangleGuy.style.cssText = `left: ${x}px; top: ${y}px`;
   });
 
-  gameScreen.innerHTML = `<img src="rocket.gif" id="gameAntag"></img>`
+    
+   
+     // Replace screenWidth with the actual width of your game screen
+    
+
+     window.newGuy = document.createElement('img');
+newGuy.src ='rocket.gif'
+newGuy.setAttribute('class', 'gameAntag')
+
+document.body.appendChild(newGuy)
+
+console.log('attemptedCreation')
+window.start = undefined
+
+window.elapsed = timestamp - start;
+
+window.shift = Math.max(0.3 * elapsed, 0);
+   
+
+   
+
+ 
 
     ;
 
   let rocketParam = getRandomInteger(425);
 
-  const element = document.getElementById("gameAntag");
+  
 
-
-  let start;
+ let element = document.querySelector(".gameAntag");
+  window.start = undefined
 
   let counting = 100;
 
   function moveGameObjects(timestamp) {
+   const elementTrack = element.getBoundingClientRect();
 
-
-    const elementTrack = element.getBoundingClientRect();
+   
     let triTrack = triangleGuy.getBoundingClientRect();
 
 
@@ -412,11 +434,18 @@ function chooseGrinchFighter() {
     if (start === undefined) {
       start = timestamp;
     }
-    const elapsed = timestamp - start;
+   window.elapsed = timestamp - start;
 
-    const shift = Math.max(0.3 * elapsed, 0);
+window.shift = Math.max(0.3 * elapsed, 0);
+
+ 
+
+
+
+
     element.style.cssText = `top: ${rocketParam}px`;
     element.style.transform += `translateX(${shift}px)`;
+
 
     if (shift < 1650) {
       requestAnimationFrame(moveGameObjects);
@@ -424,22 +453,29 @@ function chooseGrinchFighter() {
     }
 
     if (shift > 1650) {
-
+     
+    
       // Replace screenWidth with the actual width of your game screen
       rocketParam = getRandomInteger(425); // Randomize the vertical position
       start = undefined; // Reset the animation start time
 
-
       requestAnimationFrame(moveGameObjects);
+      
+ 
+  
+
+
+    }
+   
     }
 
-
-  }
 
   requestAnimationFrame(moveGameObjects);
 }
 
-
+setInterval(()=> {
+  document.body.appendChild(newGuy)
+  }, 1000) ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function resetGame() {
   document.body.style.cssText = `cursor: wait`; //initializing a loading screen for user experience
